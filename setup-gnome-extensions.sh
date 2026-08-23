@@ -5,6 +5,7 @@
 #
 #   clipboard-indicator@tudmotu.com       # clipboard history (top-bar icon)
 #   blur-my-shell@aunetx                  # frosted glass (panel, overview, alt-tab)
+#   another-window-session-manager@gmail.com  # macOS-style window save/restore
 #
 # Install path preference:
 #   1. Live: with a shell session reachable, the shell installs + registers
@@ -19,6 +20,7 @@ set -euo pipefail
 EXTENSIONS=(
   "clipboard-indicator@tudmotu.com"
   "blur-my-shell@aunetx"
+  "another-window-session-manager@gmail.com"
 )
 
 EXT_DIR="$HOME/.local/share/gnome-shell/extensions"

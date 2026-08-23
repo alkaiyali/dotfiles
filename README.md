@@ -12,7 +12,7 @@ cd ~/dotfiles
 ./scripts/install-fonts.sh   # JetBrainsMono Nerd Font + Inter (no sudo)
 ./setup-ghostty-defaults.sh  # Ctrl+Alt+T -> Ghostty (2 pkexec prompts)
 ./setup-gnome-defaults.sh    # dconf defaults (desktop animations ON)
-./setup-gnome-extensions.sh  # GNOME extensions (clipboard indicator)
+./setup-gnome-extensions.sh  # GNOME extensions (clipboard indicator, blur, session restore)
 ./setup-normcap-defaults.sh  # NormCap flatpak OCR fix + neutral border (no sudo)
 ./setup-audio-separator.sh   # unwa Instrumental v1e plus model + audio-separator CLI (no sudo, 913 MB)
 ~/.local/bin/vlc-windows-look.sh   # VLC flatpak, Windows look (1 pkexec if flatpak missing)
@@ -45,9 +45,10 @@ change re-points our own symlinks; real files are never clobbered.
 | `ghostty/config` | Ghostty config → `~/.config/ghostty/config` (step 4 of setup script) |
 | `setup-ghostty-defaults.sh` | Idempotent: Ghostty as default terminal (x-terminal-emulator alt + Ctrl+Alt+T via gsettings) |
 | `setup-gnome-defaults.sh` | Idempotent: dconf defaults (desktop animations ON, Blur prefs) |
-| `setup-gnome-extensions.sh` | Idempotent: installs/enables GNOME extensions from EGO (clipboard indicator, Blur my Shell); merges `enabled-extensions`, never clobbers |
+| `setup-gnome-extensions.sh` | Idempotent: installs/enables GNOME extensions from EGO (clipboard indicator, Blur my Shell, window session manager); merges `enabled-extensions`, never clobbers |
 | `blur-my-shell/settings.dconf` | Blur my Shell dconf settings (glass pipelines, bright alt-tab; dock blur OFF — ubuntu-dock keeps its own look) — applied by setup-gnome-defaults.sh |
 | `dash-to-dock/settings.dconf` | Ubuntu Dock dconf settings (bottom dock, white dots, external-monitor preference) — applied by setup-gnome-defaults.sh |
+| `awsm/settings.dconf` | Window Session Manager dconf settings (auto-save before logout/restart/power-off + restore at login = macOS-style reopen) — applied by setup-gnome-defaults.sh |
 | `desktop/Dock Settings.desktop` | Dock Settings launcher — copied to `~/Desktop` by install.sh **only when desktop icons (ding) are enabled**; copied not symlinked (gvfs trusted flag is per-path) |
 | `setup-normcap-defaults.sh` | Idempotent: NormCap flatpak OCR fix (tessdata bugs) + neutral capture border; config in `normcap/settings.conf` |
 | `setup-audio-separator.sh` | Idempotent: installs audio-separator (uv/pipx/venv fallback), fetches unwa **Instrumental v1e plus** MelBand-Roformer model (913 MB) into `~/.audio_separator/models`, pins `AUDIO_SEPARATOR_MODEL_DIR` in `.bashrc` (CLI default is `/tmp`!) |
@@ -119,11 +120,27 @@ script (it keeps your file and shows a diff) or copy the new value into
 ## GNOME extensions
 
 `setup-gnome-extensions.sh` — idempotent: installs **Clipboard Indicator**
-(clipboard history in the top bar) and **Blur my Shell** from
-extensions.gnome.org, then merges them into `enabled-extensions` without
-touching anything already on the list. Clipboard Indicator was chosen over
-the newer "Clipboard History" extension (SUPERCILEX) after an A/B test —
-image previews were broken on X11 and the tray icon mis-scaled.
+(clipboard history in the top bar), **Blur my Shell**, and **Another Window
+Session Manager** from extensions.gnome.org, then merges them into
+`enabled-extensions` without touching anything already on the list. Clipboard
+Indicator was chosen over the newer "Clipboard History" extension
+(SUPERCILEX) after an A/B test — image previews were broken on X11 and the
+tray icon mis-scaled.
+
+**Window Session Manager** (awsm) gives macOS-style "reopen your windows
+where you left off": it snapshots every open window live to
+`~/.config/another-window-session-manager/currentSession/` (geometry,
+workspace, launch command), closes them gracefully on
+logout/restart/power-off via the end-session dialog, and reopens them at
+login. Because the snapshot is continuously on disk, even a forced reset
+loses nothing. Needs `gir1.2-gtop-2.0` (in packages.txt) for safe process
+close. The login-restore hook is the autostart entry
+`home-gnome/.config/autostart/_awsm-restore-previous-session.desktop`
+(symlinked by install.sh); its `sleep ${autostartDelay}` placeholder is what
+the extension's prefs dialog rewrites when you change the delay — if you do,
+re-copy the file rather than editing through the symlink. Session toggles
+are versioned in `awsm/settings.dconf`; the per-window cache
+(`windows-mapping`, `currentSession/`) is machine-local and not versioned.
 
 ## Phone link: KDE Connect
 

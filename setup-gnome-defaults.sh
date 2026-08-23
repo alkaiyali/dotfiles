@@ -33,4 +33,13 @@ else
   echo "  no dash-to-dock/settings.dconf in repo — skipping"
 fi
 
+echo "==> GNOME: Window Session Manager (macOS-style save/restore, from awsm/settings.dconf)"
+AWSM_DCONF="$DOTFILES/awsm/settings.dconf"
+if [ -f "$AWSM_DCONF" ]; then
+  dconf load /org/gnome/shell/extensions/another-window-session-manager/ < "$AWSM_DCONF"
+  echo "  applied"
+else
+  echo "  no awsm/settings.dconf in repo — skipping"
+fi
+
 echo "==> Done."
