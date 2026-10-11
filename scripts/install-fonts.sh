@@ -4,10 +4,16 @@
 # Installs:
 #   - JetBrainsMono Nerd Font (full set, incl. Mono variants) -> ~/.local/share/fonts/JetBrainsMonoNerd
 #   - Inter (static, from the rsms/inter release)             -> ~/.local/share/fonts/Inter
+#   - Arial (regular/bold/italic/bold-italic)                 -> ~/.local/share/fonts/MSFonts
+#     Redistributable under the Microsoft core fonts EULA; canonical source is
+#     sourceforge.net/projects/corefonts, fetched here as raw TTFs from the
+#     ImageMagick/msttcorefonts mirror (no cabextract needed).
 #
-# NOT installed here (proprietary): Segoe UI — copy segoeui*.ttf from a
-# Windows install (C:\Windows\Fonts\segoeui*.ttf) into
-# ~/.local/share/fonts/SegoeUI/ yourself.
+# NOT installed here (proprietary, not redistributable) — copy yourself:
+#   - Segoe UI — copy segoeui*.ttf from a Windows install
+#     (C:\Windows\Fonts\segoeui*.ttf) into ~/.local/share/fonts/SegoeUI/
+#   - Calibri (+Calibri Bold) — from a Microsoft Office install
+#     (C:\Windows\Fonts\calibri*.ttf) into ~/.local/share/fonts/calibri/
 #
 # Idempotent: skips fonts that are already present. No sudo needed.
 set -euo pipefail
@@ -65,5 +71,18 @@ else
   log "Inter already installed"
 fi
 
+# ---- Arial (Microsoft core fonts — redistributable under the MS core fonts EULA;
+#      raw TTFs from the ImageMagick/msttcorefonts mirror of sourceforge corefonts)
+if [ ! -f "$FONT_DIR/MSFonts/Arial.ttf" ]; then
+  log "Fetching Arial (regular + bold + italic + bold-italic)"
+  mkdir -p "$FONT_DIR/MSFonts"
+  for face in Arial.ttf Arial_Bold.ttf Arial_Italic.ttf Arial_Bold_Italic.ttf; do
+    curl -fsSL -o "$FONT_DIR/MSFonts/$face" \
+      "https://raw.githubusercontent.com/ImageMagick/msttcorefonts/main/fonts/$face"
+  done
+else
+  log "Arial already installed"
+fi
+
 fc-cache -f "$FONT_DIR" >/dev/null 2>&1
-log "Done. fc-list | grep -iE 'jetbrains|inter' to verify."
+log "Done. fc-list | grep -iE 'jetbrains|inter|arial' to verify."

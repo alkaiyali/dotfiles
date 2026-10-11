@@ -53,7 +53,7 @@ change re-points our own symlinks; real files are never clobbered.
 | `setup-normcap-defaults.sh` | Idempotent: NormCap flatpak OCR fix (tessdata bugs) + neutral capture border; config in `normcap/settings.conf` |
 | `setup-audio-separator.sh` | Idempotent: installs audio-separator (uv/pipx/venv fallback), fetches unwa **Instrumental v1e plus** MelBand-Roformer model (913 MB) into `~/.audio_separator/models`, pins `AUDIO_SEPARATOR_MODEL_DIR` in `.bashrc` (CLI default is `/tmp`!) |
 | `normcap/settings.conf` | Canonical NormCap config (border `#48484A`); **copied** into the sandbox dir, not symlinked (see NormCap section) |
-| `scripts/install-fonts.sh` | Fetches JetBrainsMono Nerd Font + Inter |
+| `scripts/install-fonts.sh` | Fetches JetBrainsMono Nerd Font + Inter + Arial (MS core fonts); Segoe UI/Calibri are copy-yourself |
 | `home/.local/bin/monitor-prefs` | EDID-keyed refresh-rate restorer — survives connector renames (prime-select/MUX/dock); rules `home/.config/monitor-prefs`, autostart `home-linux/.config/autostart/monitor-prefs.desktop` |
 | `packages.txt` | Curated apt / flatpak / manual package manifest |
 | `hardware/` | CPU-quarantine kit for the degraded core 1 (initramfs hook + systemd units + heartbeat) |
@@ -81,6 +81,11 @@ Mirrors the old Windows PowerShell (PSReadLine + PSFzf) muscle memory:
   routes sans-serif → Segoe UI (strong) with Inter as weak fallback.
   **Inter must stay weak** or the system conf.d rules (56/60-latin) win.
 - **JetBrainsMono Nerd Font Mono 13pt** — terminal + monospace.
+- **Arial** (regular/bold/italic/bold-italic) — fetched by `install-fonts.sh`
+  (MS core fonts EULA, redistributable) into `~/.local/share/fonts/MSFonts`.
+- **Calibri (regular + bold)** — Office-licensed, not redistributable: copy
+  `calibri*.ttf` from a Windows/Office install (`C:\Windows\Fonts\`) into
+  `~/.local/share/fonts/calibri/` yourself.
 - `home/.config/fontconfig/fonts.conf` — Segoe UI alias + ClearType-style
   subpixel rendering (embedded bytecode hinting, not autohinter).
 - `vlc-windows-look.sh` additionally writes `~/.config/fontconfig/vlc-fonts.conf`
