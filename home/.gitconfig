@@ -1,11 +1,15 @@
-[credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
+[credential]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [user]
-	name = YappLeCunt
-	email = 40585717+YappLeCunt@users.noreply.github.com
+	name = alkaiyali
+	email = 40585717+alkaiyali@users.noreply.github.com
+	signingkey = /home/cwayne/.ssh/id_sign.pub
 [core]
 	editor = code --wait
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /home/cwayne/.ssh/allowed_signers
+[include]
+	path = ~/.gitconfig.local
