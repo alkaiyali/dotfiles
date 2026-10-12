@@ -17,7 +17,6 @@ ghostty                          # ghostty.org .deb repo — noble ships no pack
 ## apt — desktop integration
 kdeconnect                       # phone link (GSConnect retired 2026-08: notification re-spam on ColorOS reconnect; KDE Connect updates in place + syncs dismissal)
 gir1.2-gtop-2.0                  # window session manager ext: safe process close (auto-save before logout/restart)
-ydotool ydotoold                 # window session manager ext: graceful close of multi-window apps (close-by-rules); unit in home-linux/.config/systemd/user/
 inotify-tools libnotify-bin      # downloads-notify.sh: watch ~/Downloads, notify-send on new files (KDE Connect/RQuickShare/browser)
 
 ## flatpak — user-level
