@@ -12,6 +12,7 @@ cd ~/dotfiles
 ./scripts/install-fonts.sh   # JetBrainsMono Nerd Font + Inter (no sudo)
 ./setup-ghostty-defaults.sh  # Ctrl+Alt+T -> Ghostty (2 pkexec prompts)
 ./setup-firewall.sh          # ufw baseline: deny incoming, allow KDE Connect 1716 (pkexec/sudo)
+./setup-pro.sh               # Ubuntu Pro attach (free personal) for esm-apps/esm-infra security (token arg, never committed)
 ./setup-gnome-defaults.sh    # dconf defaults (desktop animations ON)
 ./setup-gnome-extensions.sh  # GNOME extensions (clipboard indicator, blur, session restore)
 ./setup-normcap-defaults.sh  # NormCap flatpak OCR fix + neutral border (no sudo)
@@ -46,6 +47,7 @@ change re-points our own symlinks; real files are never clobbered.
 | `ghostty/config` | Ghostty config → `~/.config/ghostty/config` (step 4 of setup script) |
 | `setup-ghostty-defaults.sh` | Idempotent: Ghostty as default terminal (x-terminal-emulator alt + Ctrl+Alt+T via gsettings) |
 | `setup-firewall.sh` | Idempotent: ufw baseline (deny incoming / allow outgoing, allow KDE Connect 1716, disable lighttpd) |
+| `setup-pro.sh` | Idempotent: attach Ubuntu Pro (free personal) for esm-apps/esm-infra; token via arg or hidden prompt, never stored |
 | `setup-gnome-defaults.sh` | Idempotent: dconf defaults (desktop animations ON, Blur prefs) |
 | `setup-gnome-extensions.sh` | Idempotent: installs/enables GNOME extensions from EGO (clipboard indicator, Blur my Shell, window session manager); merges `enabled-extensions`, never clobbers |
 | `blur-my-shell/settings.dconf` | Blur my Shell dconf settings (glass pipelines, bright alt-tab; dock blur OFF — ubuntu-dock keeps its own look) — applied by setup-gnome-defaults.sh |
@@ -215,6 +217,24 @@ Rules live in `~/.config/monitor-prefs` (symlinked from `home/.config/`).
 X11 applies live via xrandr; Wayland uses `gnome-randr` if installed,
 otherwise syncs `monitors.xml` for the next login; macOS is best-effort
 via `displayplacer` (append a `:UUID` to each rule from `displayplacer list`).
+
+## Ubuntu Pro + security updates
+
+Main/Restricted get 5 years of free security, but Universe/Multiverse fixes
+(`ffmpeg`, `qt5`, `flatpak`, `7zip`, `aiohttp`, ...) ship via `esm-apps`,
+which needs a Pro attach — observed 2026-10-12: 50 updates withheld until
+attach, 0 after. Free Personal covers 5 machines; ESM extends both pockets
+to 2034. Run `./setup-pro.sh` with a token from
+`ubuntu.com/pro/dashboard`. Token is per-account: pass it as an arg or via
+the hidden prompt, and never commit it (this repo is public).
+
+Small distro comparison (same packages, different gate):
+
+| Distro | Universe-equivalent security | Friction |
+|---|---|---|
+| Ubuntu 24.04 | free Main 5y; Universe needs Pro attach (free personal ≤5, account + token) | one-time attach per machine |
+| Debian stable | all free via `security.debian.org`, no account | closest no-gate alternative, slower releases |
+| Fedora / openSUSE / Arch | all free | shorter window (~13 mo Fedora) or rolling (Arch) |
 
 ## Hardware (this laptop only)
 
