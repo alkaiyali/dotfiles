@@ -5,6 +5,7 @@
 
 ## apt — base
 git curl wget ca-certificates gnupg
+ufw                              # host firewall baseline (see setup-firewall.sh: deny incoming, allow 1716)
 flatpak                          # app sandboxing (VLC, NormCap)
 fzf                              # v0.46 in noble; this box runs a newer build in ~/.local/bin
 

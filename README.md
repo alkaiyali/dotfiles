@@ -11,6 +11,7 @@ cd ~/dotfiles
 ./install.sh                 # symlink home/ -> ~ (never clobbers; --dry-run first)
 ./scripts/install-fonts.sh   # JetBrainsMono Nerd Font + Inter (no sudo)
 ./setup-ghostty-defaults.sh  # Ctrl+Alt+T -> Ghostty (2 pkexec prompts)
+./setup-firewall.sh          # ufw baseline: deny incoming, allow KDE Connect 1716 (pkexec/sudo)
 ./setup-gnome-defaults.sh    # dconf defaults (desktop animations ON)
 ./setup-gnome-extensions.sh  # GNOME extensions (clipboard indicator, blur, session restore)
 ./setup-normcap-defaults.sh  # NormCap flatpak OCR fix + neutral border (no sudo)
@@ -44,6 +45,7 @@ change re-points our own symlinks; real files are never clobbered.
 | `home-kde/` | Layer 2 — **KDE DE** (KDE Connect config etc.). Active when KDE is running. |
 | `ghostty/config` | Ghostty config → `~/.config/ghostty/config` (step 4 of setup script) |
 | `setup-ghostty-defaults.sh` | Idempotent: Ghostty as default terminal (x-terminal-emulator alt + Ctrl+Alt+T via gsettings) |
+| `setup-firewall.sh` | Idempotent: ufw baseline (deny incoming / allow outgoing, allow KDE Connect 1716, disable lighttpd) |
 | `setup-gnome-defaults.sh` | Idempotent: dconf defaults (desktop animations ON, Blur prefs) |
 | `setup-gnome-extensions.sh` | Idempotent: installs/enables GNOME extensions from EGO (clipboard indicator, Blur my Shell, window session manager); merges `enabled-extensions`, never clobbers |
 | `blur-my-shell/settings.dconf` | Blur my Shell dconf settings (glass pipelines, bright alt-tab; dock blur OFF — ubuntu-dock keeps its own look) — applied by setup-gnome-defaults.sh |
@@ -162,6 +164,7 @@ auto-starts via `/etc/xdg/autostart`. Pair from the tray icon or:
 Same Android app either way (KDE Connect for Android). Device certs and
 pairing state live in `~/.config/kdeconnect/` and are deliberately NOT
 versioned — machine-specific, and re-pairing takes seconds on a fresh box.
+Firewall: `./setup-firewall.sh` opens `1716/tcp + 1716/udp` for pairing/discovery.
 
 **Blur my Shell** (`blur-my-shell@aunetx`) adds frosted glass to the panel,
 overview, and alt-tab (custom bright pipeline — the default 0.6 brightness
