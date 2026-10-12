@@ -1,3 +1,4 @@
 [/]
 enable-autoclose-session=true
 enable-restore-previous-session=true
+restore-at-startup-without-asking=true
