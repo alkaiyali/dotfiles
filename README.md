@@ -22,12 +22,16 @@ cd ~/dotfiles
 ```
 
 Then handle the non-dotfile bits (see `packages.txt`): apt installs
-(`git curl gh ghostty flatpak fzf`), `flatpak install org.videolan.VLC
+(`git curl gh flatpak fzf`), `flatpak install org.videolan.VLC
 com.github.dynobo.normcap eu.betterbird.Betterbird`,
 starship installer, `git clone --depth 1
 junegunn/fzf.git ~/.fzf`, ble.sh build, and copy Segoe UI from a Windows
-install (proprietary — never vendored here). Finally, on this laptop, apply
-the CPU-quarantine kit (`hardware/README.md`).
+install (proprietary — never vendored here).
+
+Ghostty is **not** in noble's archive and its PPA is retired: install the
+community `.deb` with
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"`.
+Then, on this laptop, apply the CPU-quarantine kit (`hardware/README.md`).
 
 ## Layout
 

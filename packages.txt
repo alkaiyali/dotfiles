@@ -12,7 +12,6 @@ fzf                              # v0.46 in noble; this box runs a newer build i
 
 ## apt — 3rd-party repos
 gh                               # cli.github.com apt repo (official)
-ghostty                          # ghostty.org .deb repo — noble ships no package
 google-chrome-stable             # dl.google.com/linux/chrome-stable/deb
 code                             # packages.microsoft.com/repos/code (VS Code)
 nodejs                           # deb.nodesource.com/node_22.x — npm ships inside, `npm` is not its own package
@@ -48,6 +47,17 @@ pdfcraft 0.14.0                  # PDF reader + editor
 gridcraft 0.12.1                 # spreadsheet
 filmcraft 0.13.0                 # non-linear video editor
 wordcraft 0.11.0                 # word processor
+
+# Other vendor .debs — install the release .deb by hand, re-download to update.
+ghostty 1.3.1                    # github.com/mkasberg/ghostty-ubuntu — no official noble package
+                                 #   until 26.04. The PPA that served 1.3.1 is retired (empty package
+                                 #   index since 2026-03) and upstream now ships GitHub .deb releases;
+                                 #   1.3.1 is the newest community build, so there is nothing to update
+                                 #   until they cut a new one (then re-run their install.sh).
+pi-gui 1.0.1                     # github.com/minghinmatthewlam/pi-gui — desktop UI for the pi
+                                 #   coding agent; installs under /opt/pi-gui
+r-quick-share 0.11.5             # github.com/martichou/rquickshare — Android Quick Share client
+via-nativia 3.0.0                # github.com/the-via/nativia — the Via browser as a native app
 
 ## manual installs (see README)
 starship                         # ~/.local/bin/starship (official installer script)
