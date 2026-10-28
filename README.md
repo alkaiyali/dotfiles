@@ -60,6 +60,8 @@ change re-points our own symlinks; real files are never clobbered.
 | `scripts/install-fonts.sh` | Fetches JetBrainsMono Nerd Font + Inter + Arial (MS core fonts); Segoe UI/Calibri are copy-yourself |
 | `home/.local/bin/monitor-prefs` | EDID-keyed refresh-rate restorer — survives connector renames (prime-select/MUX/dock); rules `home/.config/monitor-prefs`, autostart `home-linux/.config/autostart/monitor-prefs.desktop` |
 | `packages.txt` | Curated apt / flatpak / manual package manifest |
+| `scripts/snapshot-packages.sh` | Regenerates `packages.installed.txt` from the live box (apt manual + local `.debs`, snap, flatpak, npm -g, uv tools) — diff it against `packages.txt` to spot drift |
+| `packages.installed.txt` | Generated snapshot (never hand-edit); committed so drift shows up as a plain `git diff` |
 | `hardware/` | CPU-quarantine kit for the degraded core 1 (initramfs hook + systemd units + heartbeat) |
 | `powershell/` | Windows PowerShell 7 profile + `bootstrap-new-machine.ps1` (winget prereqs, modules, Defender exclusions). Lives at `Documents\PowerShell\` on Windows (or OneDrive\Documents\PowerShell); the local gateway token is redacted — set `$env:ANTHROPIC_API_KEY` in section 6 to your own |
 
