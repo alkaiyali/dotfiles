@@ -1,7 +1,7 @@
 # ── Ubuntu 24.04 (noble) — package manifest for this setup ────────────────────
 # A curated manifest, not an installer. The "how" for each item lives in
 # README.md / the per-app scripts. Versions are what's on the box as of
-# 2026-08-16; bump as needed.
+# 2026-10-28; bump as needed.
 
 ## apt — base
 git curl wget ca-certificates gnupg
@@ -13,6 +13,14 @@ fzf                              # v0.46 in noble; this box runs a newer build i
 ## apt — 3rd-party repos
 gh                               # cli.github.com apt repo (official)
 ghostty                          # ghostty.org .deb repo — noble ships no package
+google-chrome-stable             # dl.google.com/linux/chrome-stable/deb
+code                             # packages.microsoft.com/repos/code (VS Code)
+nodejs                           # deb.nodesource.com/node_22.x — npm ships inside, `npm` is not its own package
+tailscale                        # pkgs.tailscale.com/stable/ubuntu
+proton-vpn-gtk-app               # repo.protonvpn.com/debian
+
+## apt — desktop apps (archive / ESM)
+kitty qbittorrent easyeffects openjdk-17-jre nvidia-settings
 
 ## apt — desktop integration
 kdeconnect                       # phone link (GSConnect retired 2026-08: notification re-spam on ColorOS reconnect; KDE Connect updates in place + syncs dismissal)
@@ -24,6 +32,22 @@ org.videolan.VLC                 # QT_STYLE_OVERRIDE=fusion + vlc-fonts.conf
 com.github.dynobo.normcap        # OCR screen capture
 eu.betterbird.Betterbird         # email client — Betterbird ESR fork (Thunderbird superseded)
 art.fatdawlf.Piccolo             # PowerToys-style color picker: zoom, history, formats
+org.gimp.GIMP                    # image editor — raster/photo work outside PhotoCraft's scope
+org.prismlauncher.PrismLauncher  # Minecraft launcher
+org.vinegarhq.Sober              # Roblox (Android build)
+org.vinegarhq.Vinegar            # Roblox Studio
+com.github.k4zmu2a.spacecadetpinball
+
+## vendor .debs — GitHub releases, no apt repo
+# ArtCraft suite from github.com/storytold/<name>/releases. The .deb builds do
+# NOT self-update (only the AppImage variants do): re-download the .deb and
+# `sudo apt install ./<name>-<ver>-linux-x86_64.deb` to bump. Verify against the
+# release's SHA256SUMS.txt first — every release ships one.
+photocraft 0.16.0                # image editor: PSD, layers, masks, adjustment layers, type
+pdfcraft 0.14.0                  # PDF reader + editor
+gridcraft 0.12.1                 # spreadsheet
+filmcraft 0.13.0                 # non-linear video editor
+wordcraft 0.11.0                 # word processor
 
 ## manual installs (see README)
 starship                         # ~/.local/bin/starship (official installer script)
@@ -32,3 +56,17 @@ ble.sh                           # git clone --recursive --depth 1 .../akinomyog
 JetBrainsMono Nerd Font          # scripts/install-fonts.sh
 Inter                            # scripts/install-fonts.sh (+ vlc-windows-look.sh)
 Segoe UI                         # NOT vendored (proprietary) — copy segoeui*.ttf from a Windows install
+
+## npm -g (Node 22 from NodeSource)
+@anthropic-ai/claude-code @openai/codex @earendil-works/pi-coding-agent
+@creem_io/cli eas-cli pm2 pnpm
+
+## uv (astral.sh installer) + the tools it owns
+uv
+  audio-separator                # stem separation (see setup-audio-separator.sh)
+  comfy-cli                      # `comfy` — ComfyUI manager
+  yt-dlp
+  browser-use
+
+## single-binary / agent tooling in ~/.local/bin (no package manager)
+opencode hermes antigravity cua-driver cloudflared runpodctl blender
