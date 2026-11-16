@@ -68,7 +68,7 @@ change re-points our own symlinks; real files are never clobbered.
 | `packages.installed.txt` | Generated snapshot (never hand-edit); committed so drift shows up as a plain `git diff` |
 | `hardware/` | CPU-quarantine kit for the degraded core 1 (initramfs hook + systemd units + heartbeat) |
 | `powershell/` | Windows PowerShell 7 profile + `bootstrap-new-machine.ps1` (winget prereqs, modules, Defender exclusions). Lives at `Documents\PowerShell\` on Windows (or OneDrive\Documents\PowerShell); the local gateway token is redacted — set `$env:ANTHROPIC_API_KEY` in section 6 to your own |
-| `windows/` | Windows-only app configs (currently `mpv`). Copy `windows/mpv/*` into `%APPDATA%\mpv`; see `windows/mpv/README.md`. |
+| `windows/` | Windows-only app configs (currently `mpv`). Copy `windows/mpv/*` into `%APPDATA%\mpv`; see `windows/mpv/README.md`. Search-indexing rule: `windows/search-exclusions.md` (exclude `C:\Users\Wayne\repos` as one parent, never per-repo). |
 
 ## Shell: bash + ble.sh + starship + fzf
 
