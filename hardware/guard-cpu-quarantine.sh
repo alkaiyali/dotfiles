@@ -1,6 +1,6 @@
 #!/bin/sh
 # guard-cpu-quarantine.sh — refuse to run the CPU-quarantine kit on anything
-# but THIS laptop. Machine identity: LENOVO 82EY (IdeaPad Gaming 3 15ARH05),
+# but the IdeaPad Gaming 3. Machine identity: LENOVO 82EY (IdeaPad Gaming 3 15ARH05),
 # product serial PF2N8WGV. A mismatch means the kit landed on a healthy
 # machine — die loudly instead of silently offlining a working core.
 # Used as ExecStartPre in hardware/disable-badcore.service and

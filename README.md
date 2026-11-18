@@ -31,7 +31,7 @@ install (proprietary — never vendored here).
 Ghostty is **not** in noble's archive and its PPA is retired: install the
 community `.deb` with
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"`.
-Then, on this laptop, apply the CPU-quarantine kit (`hardware/README.md`).
+Then, on the IdeaPad Gaming 3, apply the CPU-quarantine kit (`hardware/README.md`).
 
 ## Layout
 
@@ -243,7 +243,7 @@ Small distro comparison (same packages, different gate):
 | Debian stable | all free via `security.debian.org`, no account | closest no-gate alternative, slower releases |
 | Fedora / openSUSE / Arch | all free | shorter window (~13 mo Fedora) or rolling (Arch) |
 
-## Hardware (this laptop only)
+## Hardware (IdeaPad Gaming 3 only)
 
 `hardware/` — core 1 (CPUs 2/3) is physically degraded; the kit offlines it
 in the initramfs (earliest possible point) with a systemd backup, or

@@ -1,6 +1,6 @@
-# hardware/ — CPU quarantine kit for the degraded core
+# hardware/ — CPU quarantine kit for the degraded core (IdeaPad Gaming 3 15ARH05)
 
-Core 1 (CPUs 2/3) of this IdeaPad's Ryzen 7 4800H is physically degraded —
+Core 1 (CPUs 2/3) of the IdeaPad Gaming 3's Ryzen 7 4800H is physically degraded —
 it segfaults tasks and hard-freezes the box on both Windows and Linux.
 This kit keeps the damage contained.
 
@@ -38,7 +38,7 @@ sudo systemctl enable --now throttle-badcore.service
 ## Safety — machine guard
 
 Both the initramfs hook and the systemd units verify the DMI identity of
-this exact laptop before touching any CPU: `sys_vendor` = LENOVO,
+this exact IdeaPad Gaming 3 before touching any CPU: `sys_vendor` = LENOVO,
 `product_name` = 82EY (IdeaPad Gaming 3 15ARH05), `product_serial` =
 PF2N8WGV. On any other machine:
 
